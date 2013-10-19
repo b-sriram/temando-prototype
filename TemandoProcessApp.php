@@ -5,7 +5,7 @@
 	
 	class TemandoProcessApp
 	{
-		// class variables
+		// Intilizing class variables
 		public $QuotesByRequest = array();
 		public $quoteList = array();
 		public $serverUrl = "";
@@ -44,14 +44,16 @@
 			 */
 			try{
                 //getting response using get quotes request
-
 				$getQuotesByRequestResponse = $client->getQuotesByRequest($this->QuotesByRequest);
+				//checking whther repsonse is exsted.
 				if (property_exists($getQuotesByRequestResponse,'quote'))
 				{
+					//dumping quote values into quotes variable
 					$quotes = $getQuotesByRequestResponse->quote;
 					//var_dump($quotes);
 					if (count($quotes) == 1)
 					{
+						//intilizing required array in to quote details
 						$responseDetails = array();
 						$responseDetails['deliveryMethod'] = $quotes->deliveryMethod;
 						$responseDetails['$etaFrom'] = $quotes->etaFrom;
@@ -62,9 +64,10 @@
 						array_push($this->quoteList,  $responseDetails);
 					}
 					else
-					{
+					{//Looping if more than one carrier details in response.
 						foreach( $quotes as $quoteKey => $quoteDetails )
 						{
+							//intilizing required array in to quote details
 							$responseDetails = array();
 					 		$responseDetails['deliveryMethod'] = $quoteDetails->deliveryMethod;
 					 		$responseDetails['$etaFrom'] = $quoteDetails->etaFrom;
@@ -76,10 +79,10 @@
 						}
 					}
 				}
-			}catch(SoapFault $exception){
+			}catch(SoapFault $exception){ //soap client exception handling
 				echo '<label class="exceptioncolor">Please try again later</label>';
 				}
-  			catch(Exception $exception){
+  			catch(Exception $exception){ //exception handling
   				echo '<label class="exceptioncolor">Please try again later</label>';
 			} 
 			return $this->quoteList;
