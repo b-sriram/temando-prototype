@@ -18,7 +18,7 @@
 		{
 		    $this->formErrors = array_merge($this->regionFields, $this->dimensionFields);
 		}
-		
+		// validateing given form fields
 		public function validate()
 		{
 			foreach($this->regionFields as $key => $value)
