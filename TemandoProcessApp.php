@@ -12,18 +12,18 @@
 		public $requestHeaderUrl = "";
 		
 		public function __construct ()  
-    	{  
-        	//intilizing variable
+    		{  
+        		//intilizing variable
 			$this->serverUrl = "https://training-api.temando.com/schema/2009_06/server.wsdl";
 			$this->requestHeaderUrl = "wsse:http://schemas.xmlsoap.org/ws/2002/04/secext";
 
 		}
 		
 		public function getQuoteDetails ($dimensionFieldValue = array(),  $regionFields = array())
-       	{
-       		$dimensionFieldValues = array();
+       		{
+       			$dimensionFieldValues = array();
 			array_push($dimensionFieldValues, $dimensionFieldValue);
-       		// Create a new SoapClient referencing the Temando WSDL file.
+       			// Create a new SoapClient referencing the Temando WSDL file.
 			$client = new SoapClient($this->serverUrl,array('soap_version' => SOAP_1_2));
 			/*
 			 * Create a new SoapHeader containing all your login details.
@@ -43,7 +43,7 @@
 			 * Call the method using the request details.
 			 */
 			try{
-                //getting response using get quotes request
+                		//getting response using get quotes request
 				$getQuotesByRequestResponse = $client->getQuotesByRequest($this->QuotesByRequest);
 				//checking whther repsonse is exsted.
 				if (property_exists($getQuotesByRequestResponse,'quote'))
