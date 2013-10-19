@@ -9,12 +9,12 @@
 		// Intilizing default values
 		public $formErrors = array();
 							
-		public $isValid=TRUE;
+		public $isValid = TRUE;
 		
 		/*
 		 * constructing class with form errors by given field  names.
 		 * 
-		 * 	*/
+		 */
 		public function __construct()
 		{
 		    $this->formErrors = array_merge($this->regionFields, $this->dimensionFields);
@@ -22,26 +22,26 @@
 		// validateing given form fields
 		public function validate()
 		{
-			//validating field value whether empty or not.
+			//validating region fields
 			foreach($this->regionFields as $key => $value)
 			{
 				if(empty($value))
 				{
-					$this->formErrors[$key]=$key." is required";
+					$this->formErrors[$key] = $key." is required";
 					$this->isValid=FALSE;
 				} // validating numeric field value.
 				elseif ($key == 'originCode' || $key == 'destinationCode')
 				{
 					if($this->isValid && !is_numeric($value))
 					{
-						$this->formErrors[$key]="Numbers only";
-						$this->isValid=FALSE;
+						$this->formErrors[$key] = "Numbers only";
+						$this->isValid = FALSE;
 					}
 				}
 			}
 			if($this->isValid)
 			{
-				//validating field value whether empty or not.
+				//validating dimension fields
 				foreach($this->dimensionFields as $key => $value)
 				{
 					if(empty($value))
@@ -65,23 +65,23 @@
 		*/
 		public function setFieldValues($inputValues)
 		{
-			//Intilizing array with regionFields values using trim operation.
+			//Intilizing array with regionField values using trim operation.
 			$this->regionFields=array(															
-								"originIs"=>trim($inputValues["originIs"]),
-								"originCode"=>trim($inputValues["originCode"]),
-								"originSuburb"=>trim($inputValues["originSuburb"]),
-								"destinationIs"=>trim($inputValues["destinationIs"]),
-								"destinationCode"=>trim($inputValues["destinationCode"]),
-								"destinationSuburb"=>trim($inputValues["destinationSuburb"])
-							);
-			//Intilizing array with dimensionFields values using trim operation.				
-			$this->dimensionFields=array(
-								"packaging"=>trim($inputValues["packaging"]),
-								"length"=>trim($inputValues["length"]),
-								"width"=>trim($inputValues["width"]),
-								"height"=>trim($inputValues["height"]),
-								"weight"=>trim($inputValues["weight"])
-							);
+						    "originIs"=>trim($inputValues["originIs"]),
+						    "originCode"=>trim($inputValues["originCode"]),
+						    "originSuburb"=>trim($inputValues["originSuburb"]),
+						    "destinationIs"=>trim($inputValues["destinationIs"]),
+						    "destinationCode"=>trim($inputValues["destinationCode"]),
+						    "destinationSuburb"=>trim($inputValues["destinationSuburb"])
+						);
+			//Intilizing array with dimension Fields				
+			$this->dimensionFields = array(
+							"packaging"=>trim($inputValues["packaging"]),
+							"length"=>trim($inputValues["length"]),
+							"width"=>trim($inputValues["width"]),
+							"height"=>trim($inputValues["height"]),
+							"weight"=>trim($inputValues["weight"])
+						     );
 		}
 		
 	}
