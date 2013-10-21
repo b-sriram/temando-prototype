@@ -224,18 +224,15 @@
 			</div>		
 				<?php
 					}
-					else {
-						if ($response['exceptionMessage'])
+					elseif ($response['exceptionMessage'])
 						{
 							echo "<div  id='ExceptionsDiv' class='span12'>";
 							echo "<label class='exceptioncolor'> Temando kicks back</label>";
 							echo "<hr/>";
 							echo "<label class='text-error manadatoryMark'>" . $response['exceptionMessage'] . "</label>";
 							echo "<hr/>";
-							echo "</div>";
-							
+							echo "</div>";	
 						}
-					}
 				?>
 			
 		</div>
