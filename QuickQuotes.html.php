@@ -37,6 +37,11 @@
 			{
 				padding-top:20px;
 			}
+			#ExceptionsDiv
+			{
+				padding-top:20px;
+			}
+
 			.manadatoryMark
 			{
 				font-size:16px !important;
@@ -55,23 +60,8 @@
 				font-weight:bold;
 				font-size:20px;
 				color:#006DCC;
-				text-align:center;
 			}
 		</style>
-
-		<script>
-			window.onload = function()
-			{
- 				document.getElementById("originCode").value = "";
- 				document.getElementById("originSuburb").value = "";
- 				document.getElementById("destinationCode").value = "";
- 				document.getElementById("destinationSuburb").value = "";
- 				document.getElementById("length").value = "";
- 				document.getElementById("width").value = "";
- 				document.getElementById("height").value = "";
- 				document.getElementById("weight").value = "";
-			}
-		</script>
 
 	</head>
 	<body>
@@ -122,13 +112,13 @@
 						<div class="span12">
 							<span class="span6">
 								<select name="packaging" id="packaging">
-									<option value="box">Box</option>
+									<option value="Box">Box</option>
 									<option value="Carton">Carton</option>
-									<option value="crate">Crate</option>
-									<option value="cylinder">Cylinder</option>
-									<option value="pallet">Pallet</option>
-									<option value="parcel">Parcel</option>
-									<option value="satchel">Satchel</option>
+									<option value="Crate">Crate</option>
+									<option value="Cylinder">Cylinder</option>
+									<option value="Pallet">Pallet</option>
+									<option value="Parcel">Parcel</option>
+									<option value="Satchel">Satchel</option>
 								</select>								
 							</span>
 							<span class="text-error span6"><?php echo $requestManager->formErrors['packaging'] ; ?></span>
@@ -150,7 +140,7 @@
 					</div>
 					
 					<div class="span6">
-						<span class="text-error manadatoryMark">All fields are manadatory</span>
+						<span class="text-error manadatoryMark">All fields are mandatory, This prototype expect user to give valid Inputs.</span>
 					</div>
 					
 					<div class="span6 text-center">						
@@ -198,44 +188,55 @@
 				</table>
 			</div>				
 			<?php
-				} 
-				if(isset($quoteDetails))
+				}
+				if ($response['result'] && (isset($response['results'])))
 				{
 			?>
-				<div class="span12" id="resultsDiv">
-					<label class="changecolor">Quotes</label>
-					<table class="table" id="resultsTable">
-						<tr>
-								<th>
-									Company name
-								</th>
-								<th>
-									Service
-								</th>
-								<th>
-									ETD
-								</th>
-								<th>
-									AUD
-								</th>
-								
+			<div class="span12" id="resultsDiv">
+				<label class="changecolor">Quotes</label>
+				<table class="table" id="resultsTable">
+					<tr>
+							<th>
+								Company name
+							</th>
+							<th>
+								Service
+							</th>
+							<th>
+								ETD
+							</th>
+							<th>
+								AUD
+							</th>	
 						</tr>
-					<?php
-						foreach ($quoteDetails as $key => $row) 
-						{
+						<?php
+							foreach ($response['results'] as $key => $row) 
+							{
 							echo "<tr>";
 								echo "<td>".$row['companyName']."</td>";
 								echo "<td>".$row['deliveryMethod']."</td>";
 								echo "<td>".$row['$etaFrom']." - ".$row['$etaTo']."</td>";
 								echo "<td>".$row['$totalPrice']."</td>";
 							echo "</tr>";
-						}
-					?>	
+							}
+						?>	
 				</table>
-			</div>				
-			<?php
-			} 
-		?>
+			</div>		
+				<?php
+					}
+					else {
+						if ($response['exceptionMessage'])
+						{
+							echo "<div  id='ExceptionsDiv' class='span12'>";
+							echo "<label class='exceptioncolor'> Temando kicks back</label>";
+							echo "<hr/>";
+							echo "<label class='text-error manadatoryMark'>" . $response['exceptionMessage'] . "</label>";
+							echo "<hr/>";
+							echo "</div>";
+							
+						}
+					}
+				?>
 			
 		</div>
 		<!-- Latest compiled and minified JavaScript -->

@@ -21,6 +21,7 @@
 			$dimensionFieldValues["class"] = "Freight";
 			$dimensionFieldValues["quantity"] = "1";
 			$dimensionFieldValues["mode"] = "Less than load";
+
 			/*
 			 * setting regionFieldValues with basic values and fieldValues
 			 */
@@ -29,11 +30,12 @@
 			$regionFields["destinationCountry"] = "AU";
 			$regionFields["itemNature"] = "Domestic";
 			$regionFields["itemMethod"] = "Door to Door";
+			
             // Request quoteDetails using process manager 
 			
 			include 'TemandoProcessApp.php';
 			$processManager = new TemandoProcessApp();
-			$quoteDetails = $processManager-> getQuoteDetails($dimensionFieldValues, $regionFields);
+			$response = $processManager -> getQuoteDetails($dimensionFieldValues, $regionFields);
 		}
 
 	}

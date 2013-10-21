@@ -7,7 +7,7 @@
 	{
 		// Intilizing class variables
 		public $QuotesByRequest = array();
-		public $quoteList = array();
+		public $response = array('result' => False , "results" => array(), 'exceptionMessage' => '');
 		public $serverUrl = "";
 		public $requestHeaderUrl = "";
 		
@@ -48,6 +48,7 @@
 				//checking whther repsonse is exsted.
 				if (property_exists($getQuotesByRequestResponse,'quote'))
 				{
+					$quoteList = array();
 					//dumping quote values into quotes variable
 					$quotes = $getQuotesByRequestResponse->quote;
 					//var_dump($quotes);
@@ -61,7 +62,7 @@
 						$responseDetails['$totalPrice'] = $quotes->totalPrice;
 						$carrierObj = $quotes->carrier;
 						$responseDetails['companyName'] = $carrierObj->companyName;
-						array_push($this->quoteList,  $responseDetails);
+						array_push($quoteList,  $responseDetails);
 					}
 					else
 					{//Looping if more than one carrier details in response.
@@ -75,17 +76,21 @@
 					 		$responseDetails['$totalPrice'] = $quoteDetails->totalPrice;
 					 		$carrierObj = $quoteDetails->carrier;
 					 		$responseDetails['companyName'] = $carrierObj->companyName;
-					 		array_push($this->quoteList,  $responseDetails);
+					 		array_push($quoteList,  $responseDetails);
 						}
 					}
+					$this->response['result'] = TRUE;
+					$this->response['results'] = $quoteList;
 				}
-			}catch(SoapFault $exception){ //soap client exception handling
-				echo '<label class="exceptioncolor">Please try again later</label>';
+			}catch(SoapFault $e){ //soap client exception handling
+				//echo 'Caught exception: ',  $e->getMessage(), "\n";
+				$this->response['exceptionMessage'] = $e->getMessage();
 				}
   			catch(Exception $exception){ //exception handling
-  				echo '<label class="exceptioncolor">Please try again later</label>';
+  				//echo '<label class="exceptioncolor">Please try again later</label>';
+				$this->response['exceptionMessage'] = $e->getMessage();
 			} 
-			return $this->quoteList;
+			return $this->response;
 	   	}
 	}
 ?>
