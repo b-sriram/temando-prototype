@@ -28,7 +28,7 @@
 			/*
 			 * Create a new SoapHeader containing all your login details.
 			 */
-			$username = "temandotest";
+			$username = "temandotest2";
 			$password = "password";
 			$headerSecurityStr = "<Security><UsernameToken><Username>".$username."</Username>
 								<Password>".$password."</Password></UsernameToken></Security>";
