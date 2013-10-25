@@ -21,8 +21,7 @@
     if ($_SERVER["REQUEST_METHOD"] == "POST")
     {
         // Validate form fields using request manager App
-        $requestManager->setFieldValues($_POST);
-        $requestManager->validate();
+        $requestManager->ExtractAndValidate($_POST);
         
         // Temando api calling process, After all fields are validated
         if($requestManager->isValid)
