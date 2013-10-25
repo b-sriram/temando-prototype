@@ -189,7 +189,7 @@
 			</div>				
 			<?php
 				}
-				if ($response['flag'] && (isset($response['quotelist'])))
+				if ($response['flag'] && (isset($response['quotesList'])))
 				{
 			?>
 			<div class="span12" id="resultsDiv">
@@ -210,7 +210,7 @@
 							</th>	
 						</tr>
 						<?php
-							foreach ($response['quotelist'] as $key => $row) 
+							foreach ($response['quotesList'] as $key => $row) 
 							{
 							echo "<tr>";
 								echo "<td>".$row['companyName']."</td>";

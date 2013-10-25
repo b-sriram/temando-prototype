@@ -1,34 +1,49 @@
+
 <?php
+
+/**
+ * A class to handle request and response of Temando API
+ *
+ * PHP version 5
+ *
+ * @category   Shipment Services
+ * @author     Reddy <sriram.reddy@bigcommerce.com>
+ * @author     Sriram <sriram.bandi@bigcommerce.com>
+ * @version    Prototype
+ * @link       http://temandoprototype.herokuapp.com
+ * 
+ */
+ 
     ini_set('display_errors', '1');
     ini_set("soap.wsdl_cache_enabled", "1");
-    /*
-     *This class process request quotes using soapclient
-    */
+ 
     class TemandoProcessApp
     {
-        // Initialize class property
-        public $resultQuotes = array();
-        /*
-        * Parsing Response quotes into resultQuotes
+        public $quotesList = array();
+        /**
+        * Make the quotes List from individual quote
         */
-        public function setResultQuotes( $reponseQuotes )
+        public function setQuotesList( $aQuote )
         {
-            $eachQuoteDetails = array();
-            $eachQuoteDetails['deliveryMethod'] = $reponseQuotes -> deliveryMethod;
-            $eachQuoteDetails['$etaFrom'] = $reponseQuotes -> etaFrom;
-            $eachQuoteDetails['$etaTo'] = $reponseQuotes -> etaTo;
-            $eachQuoteDetails['$totalPrice'] = $reponseQuotes -> totalPrice;
-            $carrierObj = $reponseQuotes->carrier;
-            $eachQuoteDetails['companyName'] = $carrierObj -> companyName;
-            array_push( $this -> resultQuotes,  $eachQuoteDetails );
+            // set required properties among all properties of a quote
+            $individualQuote = array();
+            $individualQuote['deliveryMethod'] = $aQuote -> deliveryMethod;
+            $individualQuote['$etaFrom'] = $aQuote -> etaFrom;
+            $individualQuote['$etaTo'] = $aQuote -> etaTo;
+            $individualQuote['$totalPrice'] = $aQuote -> totalPrice;
+            $carrierObj = $aQuote -> carrier;
+            $individualQuote['companyName'] = $carrierObj -> companyName;
+            
+            // Append individual quote to quotes List 
+            array_push( $this -> quotesList,  $individualQuote );
         }
-        /*
-        * Return response with status and result quotes
+        /**
+        *  This function get quote details from API and Return the response with status and quotes List
         */
         public function getQuoteDetails ( $regionFields = array(), $dimensionFieldValue = array() )
         {
             // Initialize default Values
-            $response = array( 'flag' => False , "quotelist" => array(), 'exceptionMessage' => '' );
+            $response = array( 'flag' => False , "quotesList" => array(), 'exceptionMessage' => '' );
             $temandoWsdlUrl = "https://training-api.temando.com/schema/2009_06/server.wsdl";
             $requestHeaderUrl = "wsse:http://schemas.xmlsoap.org/ws/2002/04/secext";
             // Create a new SoapHeader containing all your login details.
@@ -49,25 +64,25 @@
                 $quotesByRequest["anythings"] = array( $dimensionFieldValue );
                 $getQuotesByRequestResponse = $client -> getQuotesByRequest($quotesByRequest);
 
-                //Check response have quote details
-                if ( property_exists($getQuotesByRequestResponse,'quote') )
+                //Check if response have quote details
+                if ( property_exists($getQuotesByRequestResponse, 'quote') )
                 {
-                    // Get response quotes
-                    $reponseQuotes = $getQuotesByRequestResponse -> quote;
-                    // Set response quotes into result quotes
-                    if ( count($reponseQuotes) == 1 )
+                    $quotes = $getQuotesByRequestResponse -> quote;
+                    
+                    // Set single quote into quotes List
+                    if ( count($quotes) == 1 )
                     {
-                        $this -> setResultQuotes($reponseQuotes);
+                        $this -> setQuotesList($quotes);
                     }
-                    else
-                    {
-                        foreach( $reponseQuotes as $quoteKey => $quoteDetails )
+                    else 
+                    {   // Set multiple quotes into quotes list
+                        foreach( $quotes as $quoteKey => $quoteDetails )
                         {
-                            $this -> setResultQuotes($quoteDetails);
+                            $this -> setQuotesList($quoteDetails);
                         }
                     }
                     $response['flag'] = TRUE;
-                    $response['quotelist'] = $this -> resultQuotes;
+                    $response['quotesList'] = $this -> quotesList;
                 }
             }
             catch(SoapFault $e){ // Soap client exception handling

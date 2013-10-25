@@ -1,9 +1,23 @@
 <?php
+
+/**
+ * Quote request form handler
+ *
+ * PHP version 5
+ *
+ * @category   Shipment Services
+ * @author     Reddy <sriram.reddy@bigcommerce.com>
+ * @author     Sriram <sriram.bandi@bigcommerce.com>
+ * @version    Prototype
+ * @link       http://temandoprototype.herokuapp.com
+ * 
+ */
+ 
     include 'RequestApp.php';
     
     $requestManager = new RequestApp();
     
-    // On Request form submission
+    // On form submission
     if ($_SERVER["REQUEST_METHOD"] == "POST")
     {
         // Validate form fields using request manager App

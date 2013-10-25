@@ -1,7 +1,18 @@
 <?php 
-    /*
-     *  This class validate and set form values into respective properties
-    */
+
+/**
+ * A class to validate and set form values into respective properties
+ *
+ * PHP version 5
+ *
+ * @category   Shipment Services
+ * @author     Reddy <sriram.reddy@bigcommerce.com>
+ * @author     Sriram <sriram.bandi@bigcommerce.com>
+ * @version    Prototype
+ * @link       http://temandoprototype.herokuapp.com
+ * 
+ */
+    
     class RequestApp
     {
         // Initialize Field names and form errors
@@ -19,7 +30,7 @@
         {
             $this->formErrors = array_merge($this->regionFields, $this->dimensionFields);
         }
-        /*
+        /**
          * Set form fileds into respective properties 
          */
         public function setFieldValues($inputValues)
@@ -38,8 +49,9 @@
             $this -> dimensionFields ["weight"] = trim( $inputValues["weight"] );
             
         }
-
-        // Validate fieldvalue against field property
+        /**
+         * Validate fieldvalue against field property
+        */
         public function fieldsValidation($fieldname, $fieldValue)
         {
             // Check fieldValue is empty or not.
@@ -60,7 +72,7 @@
             }
             return $errorMessage;
         }
-        /*
+        /**
          * Validate form fields 
         */
         public function validate()
