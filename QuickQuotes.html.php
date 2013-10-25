@@ -86,7 +86,7 @@
 								<input type="text" name="originCode" id="originCode" class="shortInputs"  placeholder="Post code" value="<?php echo $requestManager->regionFields['originCode']; ?>"/>
 								<input type="text" name="originSuburb" id="originSuburb" class="shortInputs"  placeholder="Origin suburb" value="<?php echo $requestManager->regionFields['originSuburb']; ?>"/>
 							</span>
-							<span class="text-error span6"><?php echo $requestManager->formErrors['originCode'] ; ?><?php echo ($requestManager->formErrors['originCode'])?"":$requestManager->formErrors['originSuburb'] ; ?></span>
+							<span class="text-error span6"><?php echo $requestManager->formErrors['originCode'] ; ?>&nbsp;&nbsp;&nbsp;<?php echo $requestManager->formErrors['originSuburb'] ; ?></span>
 						</div>
 						<div class="span12">
 							<span class="pull-left">
@@ -107,7 +107,7 @@
 								<input type="text" name="destinationCode" id="destinationCode" class="shortInputs"  placeholder="Post code" value="<?php echo $requestManager->regionFields['destinationCode']; ?>"/>
 								<input type="text" name="destinationSuburb" id="destinationSuburb" class="shortInputs" placeholder="Destination suburb" value="<?php echo $requestManager->regionFields['destinationSuburb']; ?>"/>
 							</span>
-							<span class="text-error span6"><?php echo $requestManager->formErrors['destinationCode'] ; ?><?php echo ($requestManager->formErrors['destinationCode'])?"":$requestManager->formErrors['destinationSuburb'] ; ?></span>
+							<span class="text-error span6"><?php echo $requestManager->formErrors['destinationCode'] ; ?>&nbsp;&nbsp;&nbsp;<?php echo $requestManager->formErrors['destinationSuburb'] ; ?></span>
 						</div>
 						<div class="span12">
 							<span class="span6">
@@ -128,14 +128,14 @@
 								<input type="text" name="length" id="length" placeholder="Length(cm)" class="shortInputs" value="<?php echo $requestManager->dimensionFields['length']; ?>"/>
 								<input type="text" name="width" id="width" placeholder="Width(cm)" class="shortInputs" value="<?php echo $requestManager->dimensionFields['width']; ?>" />
 							</span>
-							<span class="text-error span6"><?php echo $requestManager->formErrors['length'] ; ?><?php echo ($requestManager->formErrors['length'])?"":$requestManager->formErrors['width'] ; ?></span>							
+							<span class="text-error span6"><?php echo $requestManager->formErrors['length'] ; ?>&nbsp;&nbsp;&nbsp;<?php echo $requestManager->formErrors['width'] ; ?></span>							
 						</div>				
 						<div class="span12">							
 							<span class="span6">
 								<input type="text" name="height" id="height" placeholder="Height(cm)" class="shortInputs" value="<?php echo $requestManager->dimensionFields['height']; ?>"/>
 								<input type="text" name="weight" id="weight"  placeholder="Weight(kg)" class="shortInputs" value="<?php echo $requestManager->dimensionFields['weight']; ?>"/>
 							</span>	
-							<span class="text-error span6"><?php echo $requestManager->formErrors['height'] ; ?><?php echo ($requestManager->formErrors['height'])?"":$requestManager->formErrors['weight'] ; ?></span>							
+							<span class="text-error span6"><?php echo $requestManager->formErrors['height'] ; ?>&nbsp;&nbsp;&nbsp;<?php echo $requestManager->formErrors['weight'] ; ?></span>							
 						</div>					
 					</div>
 					

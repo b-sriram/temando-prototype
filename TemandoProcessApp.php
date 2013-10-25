@@ -3,7 +3,7 @@
 	ini_set('display_errors', '1');
 	ini_set("soap.wsdl_cache_enabled", "1");
 	/*
-     * 
+     * This class describes requetsing quotes using soapclient
      */
 	class TemandoProcessApp
 	{
@@ -68,17 +68,17 @@
 		}
     
         /*
-        * 
+        * Parsing input array values into quotelist array
         */
-        public function requestArraySetup($quoteDetails)
+        public function requestArraySetup($inputArray)
         {
             //
             $responseDetails = array();
-            $responseDetails['deliveryMethod'] = $quoteDetails->deliveryMethod;
-            $responseDetails['$etaFrom'] = $quoteDetails->etaFrom;
-            $responseDetails['$etaTo'] = $quoteDetails->etaTo;
-            $responseDetails['$totalPrice'] = $quoteDetails->totalPrice;
-            $carrierObj = $quoteDetails->carrier;
+            $responseDetails['deliveryMethod'] = $inputArray->deliveryMethod;
+            $responseDetails['$etaFrom'] = $inputArray->etaFrom;
+            $responseDetails['$etaTo'] = $inputArray->etaTo;
+            $responseDetails['$totalPrice'] = $inputArray->totalPrice;
+            $carrierObj = $inputArray->carrier;
             $responseDetails['companyName'] = $carrierObj->companyName;
             array_push($this->quoteList,  $responseDetails);
         }

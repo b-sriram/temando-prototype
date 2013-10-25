@@ -1,15 +1,16 @@
 <?php
 	
 	include 'RequestApp.php';
-    //
+    //creating request manager object
 	$requestManager=new RequestApp();
-    //
+    //After submitting the form 
 	if ($_SERVER["REQUEST_METHOD"] == "POST")
 	{
-		//
+		//Validating form fields using request manager App
 		$requestManager->setFieldValues($_POST);
 		$requestManager->validate();
-		//
+
+		//requesting temando api calling process, After all field values are validated 
 		if($requestManager->isValid)
 		{
 			//setting regionFieldValues with basic values and fieldValues
