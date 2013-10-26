@@ -34,11 +34,11 @@
         /**
          * Validate fieldvalue against field property
         */
-        public function validateAndReturn($fieldName)
+        public function validateAndReturn($inputValues, $fieldName)
         {
             // Check fieldValue is empty or not.
             $errorMessage = "";
-            $fieldValue = trim($inputValues[$key]);
+            $fieldValue = trim($inputValues[$fieldName]);
 
             if( empty($fieldValue) )
             {
@@ -54,7 +54,7 @@
                     $this -> isValid = FALSE;
                 }
             }
-            $this -> formErrors[$key] = errorMessage;
+            $this -> formErrors[$fieldName] = $errorMessage;
             return $fieldValue;
         }
         /**
@@ -64,12 +64,12 @@
         {
             // Requesting validation against regionFields
             foreach($this -> regionFields as $key => $value){
-                $this -> regionFields[$key] = $this->validateAndReturn($key); 
+                $this -> regionFields[$key] = $this->validateAndReturn($inputValues,$key); 
                
             }          
             // Requesting validation against dimensionFields
             foreach($this -> dimensionFields as $key => $value){
-                $this -> dimensionFields[$key] = $this->validateAndReturn($key); 
+                $this -> dimensionFields[$key] = $this->validateAndReturn($inputValues,$key); 
                 
             }
         }
