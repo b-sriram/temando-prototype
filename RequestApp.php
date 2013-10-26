@@ -34,10 +34,12 @@
         /**
          * Validate fieldvalue against field property
         */
-        public function fieldsValidation($fieldName, $fieldValue)
+        public function validateAndReturn($fieldName)
         {
             // Check fieldValue is empty or not.
             $errorMessage = "";
+            $fieldValue = trim($inputValues[$key]);
+
             if( empty($fieldValue) )
             {
                 $errorMessage = $fieldName." Need values";
@@ -52,24 +54,23 @@
                     $this -> isValid = FALSE;
                 }
             }
-            return $errorMessage;
+            $this -> formErrors[$key] = errorMessage;
+            return $fieldValue;
         }
         /**
          * Set form fileds into respective properties 
          */
-        public function ExtractAndValidate($inputValues)
+        public function validateAndSet($inputValues)
         {
-            // Requesting validation against on regionFields name and value
+            // Requesting validation against regionFields
             foreach($this -> regionFields as $key => $value){
-                $fieldValue = trim($inputValues[$key]);
-                $this -> regionFields[$key] = $fieldValue;
-                $this -> formErrors[$key] = $this -> fieldsValidation( $key, $fieldValue ); 
+                $this -> regionFields[$key] = $this->validateAndReturn($key); 
+               
             }          
-            // Requesting validation against on dimensionFields name and value
+            // Requesting validation against dimensionFields
             foreach($this -> dimensionFields as $key => $value){
-                $fieldValue = trim($inputValues[$key]);
-                $this -> dimensionFields[$key] = $fieldValue;
-                $this -> formErrors[$key] = $this -> fieldsValidation( $key, $fieldValue );
+                $this -> dimensionFields[$key] = $this->validateAndReturn($key); 
+                
             }
         }
     }
