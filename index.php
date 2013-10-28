@@ -48,5 +48,5 @@
     }
     
     include 'QuickQuotes.html.php';
-    
+    //End of the file
 ?>
