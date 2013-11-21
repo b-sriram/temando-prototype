@@ -66,7 +66,7 @@
 	</head>
 	<body>
 		<div class="container">
-			<h2 class="text-center">Temando Quick Quotes</h2><br />
+			<h2 class="text-center">Temando Quick Quote</h2><br />
 			<form action="index.php" method="post" id="quotesForm">
 				<div class="span6 row-fluid offset3" id="mainWrapper" >
 					<div class="span12">
