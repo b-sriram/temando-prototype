@@ -64,7 +64,7 @@ var_dump($curl_response);
 
 <html>
 	<body>
-		<form action="www.canadapost.ca/cpotools/apps/drc/testMerchant" method="post">
+		<form action="https://www.canadapost.ca/cpotools/apps/drc/testMerchant" method="post">
 			<input type="text" name="return-url" value="<?php echo $return_url; ?>" /><br />
 			<input type="text" name="token-id" value="<?php echo $token_id; ?>" /><br />
 			<input type="text" name="platform-id" value="<?php echo $platform; ?>" /><br />
