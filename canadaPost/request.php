@@ -26,7 +26,7 @@ $platform="101010";
 //https://ct.soa-gw.canadapost.ca/ot/token/1111111111111111111111';
 
 // REST URI
-$service_url = 'www.canadapost.ca/cpotools/apps/drc/testMerchant';
+$service_url = 'https://www.canadapost.ca/cpotools/apps/drc/testMerchant';
 
 $xmlRequest = <<<XML
 <?xml version="1.0" encoding="UTF-8"?>
