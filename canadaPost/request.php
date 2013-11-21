@@ -21,8 +21,11 @@ $return_url =  "http://intense-sea-3193.herokuapp.com/canadaPost/response.php";
 $token_id="1111111111111111111111";
 $platform="101010";
 
+ 
+
+
 // REST URI
-$service_url = 'http://www.canadapost.ca/cpotools/apps/drc/testMerchant';
+$service_url = 'www.canadapost.ca/cpotools/apps/drc/merchant';
 
 $xmlRequest = <<<XML
 <?xml version="1.0" encoding="UTF-8"?>
