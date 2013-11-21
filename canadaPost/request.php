@@ -60,6 +60,21 @@ echo 'HTTP Response Status: ' . curl_getinfo($curl,CURLINFO_HTTP_CODE) . "<hr>";
 curl_close($curl);
 
 var_dump($curl_response);
+?>
+
+<html>
+	<body>
+		<form action="https://soa-gw.canadapost.ca/ot/soap/merchant/registration" method="post">
+			<input type="text" name="return-url" value="<?php echo $return_url; ?>" /><br />
+			<input type="text" name="token-id" value="<?php echo $token_id; ?>" /><br />
+			<input type="text" name="platform-id" value="<?php echo $platform; ?>" /><br />
+			<input type="submit" value="submit" />
+		</form>
+	</body>
+</html>
+
+
+<?php
 exit;
 
 // Example of using SimpleXML to parse xml response
