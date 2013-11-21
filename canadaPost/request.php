@@ -26,7 +26,7 @@ $platform="101010";
 //https://ct.soa-gw.canadapost.ca/ot/token/1111111111111111111111';
 
 // REST URI
-$service_url = 'https://soa-gw.canadapost.ca/ot/soap/merchant/registration';
+$service_url = 'www.canadapost.ca/cpotools/apps/drc/testMerchant';
 
 $xmlRequest = <<<XML
 <?xml version="1.0" encoding="UTF-8"?>
@@ -64,7 +64,7 @@ var_dump($curl_response);
 
 <html>
 	<body>
-		<form action="https://soa-gw.canadapost.ca/ot/soap/merchant/registration" method="post">
+		<form action="www.canadapost.ca/cpotools/apps/drc/testMerchant" method="post">
 			<input type="text" name="return-url" value="<?php echo $return_url; ?>" /><br />
 			<input type="text" name="token-id" value="<?php echo $token_id; ?>" /><br />
 			<input type="text" name="platform-id" value="<?php echo $platform; ?>" /><br />
