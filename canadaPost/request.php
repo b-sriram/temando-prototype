@@ -43,7 +43,7 @@ $curl = curl_init($service_url); // Create REST Request
 curl_setopt($curl, CURLOPT_SSL_VERIFYPEER, true);
 curl_setopt($curl, CURLOPT_SSL_VERIFYHOST, 2);
 curl_setopt($curl, CURLOPT_POST, true);
-curl_setopt($curl, CURLOPT_POSTFIELDS, '');
+curl_setopt($curl, CURLOPT_POSTFIELDS, $xmlRequest);
 curl_setopt($curl, CURLOPT_RETURNTRANSFER, true);
 
 curl_setopt($curl, CURLOPT_HTTPAUTH, CURLAUTH_BASIC);
